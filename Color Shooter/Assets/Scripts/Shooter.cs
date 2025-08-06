@@ -1,3 +1,4 @@
+using System.Data.Common;
 using UnityEngine;
 
 public class Test : MonoBehaviour
@@ -8,9 +9,16 @@ public class Test : MonoBehaviour
     [SerializeField] private Color currentColor;
     public void Shoot()
     {
+        Debug.Log("Start shooter");
         if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit rHit, maxDistance, TargetLayer))
         {
-            Debug.Log("PRRRRRRROUUUT");
+            var target = rHit.collider.gameObject;
+            if (target.tag == "Target")
+            {
+                Debug.Log("PRRRRRRROUUUT");
+            }
+            
         }
+        Debug.Log("End shooter");
     }
 }

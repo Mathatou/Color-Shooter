@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 369708296}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,6 +478,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
   m_PrefabInstance: {fileID: 441087506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &868208696 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4481231618143920980, guid: a1774c2a332f0594a928a8e2ea830927, type: 3}
+  m_PrefabInstance: {fileID: 5515744946444554949}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1033755877
 GameObject:
@@ -732,11 +737,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d960f3c4e369a8344a1de94deb3e222f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 0}
+  muzzle: {fileID: 868208696}
   maxDistance: 50
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   currentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1891712886
 Transform:
@@ -987,7 +992,7 @@ PrefabInstance:
       objectReference: {fileID: 1891712885}
     - target: {fileID: 8652496496532350616, guid: fd43c65eb3aed06449a1c401f621214a, type: 3}
       propertyPath: m_Name
-      value: Flingue ROuge
+      value: Flingue Rouge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
