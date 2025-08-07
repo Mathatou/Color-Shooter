@@ -1,24 +1,36 @@
-using System.Data.Common;
 using UnityEngine;
 
-public class Test : MonoBehaviour
+public abstract class Shooter : MonoBehaviour
 {
-    [SerializeField] private Transform muzzle;
-    [SerializeField] private float maxDistance = 50.0f;
-    [SerializeField] private LayerMask TargetLayer;
-    [SerializeField] private Color currentColor;
-    public void Shoot()
+    [SerializeField] protected Transform muzzle;
+    [SerializeField] protected float maxDistance = 50.0f;
+    [SerializeField] protected LayerMask TargetLayer;
+    [SerializeField] protected string currentColor;
+
+    protected virtual void Start()
     {
-        Debug.Log("Start shooter");
+        Init();
+    }
+
+    protected abstract void Init();
+
+    public virtual void Shoot()
+    {
         if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit rHit, maxDistance, TargetLayer))
         {
-            var target = rHit.collider.gameObject;
-            if (target.tag == "Target")
-            {
-                Debug.Log("PRRRRRRROUUUT");
+            var target = rHit.collider.GetComponent<Target>();
+            var myTargetColor = target.TargetColor;
+            if (target != null)
+            { 
+                if (myTargetColor.Equals(currentColor))
+                {
+                    Debug.Log($"Cible {myTargetColor} touché avec gun {currentColor}");
+                }
+                else
+                {
+                    Debug.Log("Trompé sale gay");
+                }
             }
-            
         }
-        Debug.Log("End shooter");
     }
 }
