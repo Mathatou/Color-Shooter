@@ -19,6 +19,11 @@ public abstract class Shooter : MonoBehaviour
         if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit rHit, maxDistance, TargetLayer))
         {
             var target = rHit.collider.GetComponent<Target>();
+            if (target == null)
+            {
+                Debug.LogWarning("C'est pas une cible ça ");
+                return;
+            }
             var myTargetColor = target.TargetColor;
             if (target != null)
             { 
