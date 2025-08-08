@@ -29,12 +29,10 @@ public abstract class Shooter : MonoBehaviour
             { 
                 if (myTargetColor.Equals(currentColor))
                 {
+                    target.Die(currentColor);
                     Debug.Log($"Cible {myTargetColor} touché avec gun {currentColor}");
                 }
-                else
-                {
-                    Debug.Log("Trompé sale gay");
-                }
+                
             }
         }
     }
