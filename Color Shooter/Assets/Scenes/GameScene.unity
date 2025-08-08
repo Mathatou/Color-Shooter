@@ -7393,7 +7393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 1487943626}
-  maxDistance: 50
+  maxDistance: 100
   TargetLayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -10938,7 +10938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 1283282965}
-  maxDistance: 50
+  maxDistance: 100
   TargetLayer:
     serializedVersion: 2
     m_Bits: 4294967295
