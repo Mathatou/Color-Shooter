@@ -21,8 +21,8 @@ public class MyGazeInteractor : MonoBehaviour
         var camTransform = mainCam.transform;
         if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit rHit, maxDistance,TargetLayer))
         {
-
             var targetTransform = rHit.transform;
+            Debug.Log($"targetTransform : {targetTransform} currentTarget : {currentTarget}");
             if (targetTransform == currentTarget)
             {
                 gazeTimer += Time.deltaTime;
