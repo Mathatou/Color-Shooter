@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetSpawner : MonoBehaviour
@@ -7,9 +8,18 @@ public class TargetSpawner : MonoBehaviour
     [SerializeField] private Transform[] spawnPosition;
     private int[] randomSpawnIndex;
     private int numberToSpawn = 10;
+    private bool hasTargetBeenSpawned = false;
+    private bool hasStarted = false;
 
+    private List<GameObject> spawnedTargets = new List<GameObject>();
     public void SpawnTarget()
     {
+        // Pour éviter que le bouton soit appuyé plusieurs fois
+        if (hasStarted) return;
+        hasStarted = true;
+
+        hasTargetBeenSpawned = true;
+        spawnedTargets.Clear();
         /// Cette loop permet de récup les différentes positions de manière aléatoire sans qu'elle ne se chevauchent
         randomSpawnIndex = new int[numberToSpawn];
         for (int i = 0; i < numberToSpawn; i++) 
@@ -24,13 +34,20 @@ public class TargetSpawner : MonoBehaviour
                 }
             }
             int randomTargetIndex = Random.Range(0, prefabTargets.Length);
-            Instantiate(prefabTargets[randomTargetIndex], spawnPosition[randomSpawnIndex[i]].transform);
+            GameObject singleTarget = Instantiate(prefabTargets[randomTargetIndex], spawnPosition[randomSpawnIndex[i]].transform);
+            spawnedTargets.Add(singleTarget);
         }
 
     }
-
-    public void sendbeug()
+    private void Update()
     {
-        Debug.Log("desactivtté");
+        spawnedTargets.RemoveAll(item => item == null);
+        if (spawnedTargets.Count == 0 && hasTargetBeenSpawned)
+        {
+            Debug.Log("All targets destroyed");
+            Debug.Log("Respawn ! ");
+            SpawnTarget();
+            //hasSpawned = false;
+        }
     }
 }
