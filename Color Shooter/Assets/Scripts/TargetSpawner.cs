@@ -6,6 +6,8 @@ public class TargetSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] prefabTargets;
     [SerializeField] private Transform[] spawnPosition;
+    [SerializeField] private float gameTime = 60f;
+    
     private int[] randomSpawnIndex;
     private int numberToSpawn = 10;
     private bool hasTargetBeenSpawned = false;
@@ -14,10 +16,6 @@ public class TargetSpawner : MonoBehaviour
     private List<GameObject> spawnedTargets = new List<GameObject>();
     public void SpawnTarget()
     {
-        // Pour éviter que le bouton soit appuyé plusieurs fois
-        if (hasStarted) return;
-        hasStarted = true;
-
         hasTargetBeenSpawned = true;
         spawnedTargets.Clear();
         /// Cette loop permet de récup les différentes positions de manière aléatoire sans qu'elle ne se chevauchent
@@ -39,9 +37,40 @@ public class TargetSpawner : MonoBehaviour
         }
 
     }
+    public void pushButton()
+    {
+        // Pour éviter que le bouton soit appuyé plusieurs fois
+        if (hasStarted) return;
+        hasStarted = true;
+        SpawnTarget();
+    }
+    public void resetGame()
+    {
+        gameTime = 60f;
+        hasStarted = false;
+        hasTargetBeenSpawned = false;
+        foreach (var target in spawnedTargets)
+        {
+            if (target != null)
+            {
+                Destroy(target);
+            }
+        }
+        spawnedTargets.Clear();
+    }
+
     private void Update()
     {
         spawnedTargets.RemoveAll(item => item == null);
+        if(gameTime <= 0f)
+        {
+            Debug.Log("Time's up !");
+            return;
+        }
+        else
+        {
+            gameTime -= Time.deltaTime;
+        }
         if (spawnedTargets.Count == 0 && hasTargetBeenSpawned)
         {
             Debug.Log("All targets destroyed");
