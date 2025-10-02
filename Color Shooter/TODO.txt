@@ -1,4 +1,5 @@
 Fonctionnalités : 
+	FAIT => à tester in-game
 	Système de score
 		=> Précision avec chacun des pistolets
 			=> Affichage de fin (mettre le nom et sauvegarder ça dans un json ?)

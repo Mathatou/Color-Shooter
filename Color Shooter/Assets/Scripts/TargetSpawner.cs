@@ -7,6 +7,7 @@ public class TargetSpawner : MonoBehaviour
     [SerializeField] private GameObject[] prefabTargets;
     [SerializeField] private Transform[] spawnPosition;
     [SerializeField] private float gameTime = 60f;
+    [SerializeField] private GameObject gunManager;
     
     private int[] randomSpawnIndex;
     private int numberToSpawn = 10;
@@ -18,7 +19,7 @@ public class TargetSpawner : MonoBehaviour
     {
         hasTargetBeenSpawned = true;
         spawnedTargets.Clear();
-        /// Cette loop permet de récup les différentes positions de manière aléatoire sans qu'elle ne se chevauchent
+        /// Cette loop permet de rï¿½cup les diffï¿½rentes positions de maniï¿½re alï¿½atoire sans qu'elle ne se chevauchent
         randomSpawnIndex = new int[numberToSpawn];
         for (int i = 0; i < numberToSpawn; i++) 
         {
@@ -39,7 +40,7 @@ public class TargetSpawner : MonoBehaviour
     }
     public void pushButton()
     {
-        // Pour éviter que le bouton soit appuyé plusieurs fois
+        // Pour ï¿½viter que le bouton soit appuyï¿½ plusieurs fois
         if (hasStarted) return;
         hasStarted = true;
         SpawnTarget();
@@ -58,11 +59,19 @@ public class TargetSpawner : MonoBehaviour
         }
         spawnedTargets.Clear();
     }
-
+    public void getScore()
+    {
+        var shooters = gunManager.GetComponentsInChildren<Shooter>();
+        foreach (var shooter in shooters)
+        {
+            Debug.Log($"Le pistolet {shooter.currentColor} a tirÃ© {shooter.GetShootNumber()} fois avec une prÃ©cision de {shooter.GetAccuracy()} %");
+        }
+    }
+    
     private void Update()
     {
         spawnedTargets.RemoveAll(item => item == null);
-        if(gameTime <= 0f)
+        if (gameTime <= 0f)
         {
             Debug.Log("Time's up !");
             return;
@@ -76,7 +85,6 @@ public class TargetSpawner : MonoBehaviour
             Debug.Log("All targets destroyed");
             Debug.Log("Respawn ! ");
             SpawnTarget();
-            //hasSpawned = false;
         }
     }
 }

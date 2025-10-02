@@ -1,2 +1,26 @@
 # Color Shooter
 Solo project of a Beat saber type game 
+Fonctionnalités : 
+	FAIT => à tester in-game
+	Système de score
+		=> Précision avec chacun des pistolets
+			=> Affichage de fin (mettre le nom et sauvegarder ça dans un json ?)
+	
+	Voir le rayon depuis le flingue : la visée n'est pas très intuitive, il est difficile de tirer sur les cibles, ce n'est pas un probleme de distance.
+	
+	Comment afficher le score ? Faire un menu ? 
+	Enlever le fait de pouvoir sauter !!!
+	
+"Artistique" : 
+	Ajout de SFX : 
+		=> Tir depuis le flingue
+			=> Avoir plusieurs bruitages au risque de devenir redondant
+		=>	Explosion des cibles 
+			=> Avoir plusieurs bruitages au risque de devenir redondant
+		=> Ach qui fait la voix du Tuto sur une loop ? 
+		
+	Ajout de VFX :
+		=> A la destruction d'une cible 
+		=> Au tir du flingue
+		
+	Trouver un asset sympa pour les cibles, les cubes c'est un peu nul
