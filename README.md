@@ -22,5 +22,10 @@ Fonctionnalités :
 	Ajout de VFX :
 		=> A la destruction d'une cible 
 		=> Au tir du flingue
-		
+		=> Modele de main
 	Trouver un asset sympa pour les cibles, les cubes c'est un peu nul
+	
+	
+BUG FIX : 
+	Parfois on peut pas ranger le flingue dans la truc à droite
+	Le bouton fait des dingz, à voir comment ça fonctionne 
