@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public abstract class Shooter : MonoBehaviour
 {
@@ -6,7 +7,8 @@ public abstract class Shooter : MonoBehaviour
     [SerializeField] protected float maxDistance = 50.0f;
     [SerializeField] protected LayerMask TargetLayer;
     [SerializeField] protected string currentColor;
-
+    [SerializeField] protected VisualEffect mVFX;
+    
     protected int shootNumber = 0;
     protected int hitNumber = 0;
     public int GetShootNumber()
@@ -26,6 +28,7 @@ public abstract class Shooter : MonoBehaviour
 
     public virtual void Shoot()
     {
+        mVFX.Play();
         if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit rHit, maxDistance, TargetLayer))
         {
             var target = rHit.collider.GetComponent<Target>();
