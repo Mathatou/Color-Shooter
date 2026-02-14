@@ -7,7 +7,7 @@ public class Target : MonoBehaviour
 
     public void Die(string gunColor)
     {
-        if (gunColor == targetColor)
+        if (gunColor.Equals (targetColor))
         {
             Debug.Log($"{gameObject.name} is destroeyd");
             Destroy(gameObject);
