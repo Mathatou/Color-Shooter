@@ -8,7 +8,9 @@ public abstract class Shooter : MonoBehaviour
     [SerializeField] protected LayerMask TargetLayer;
     [SerializeField] protected string currentColor;
     [SerializeField] protected VisualEffect mVFX;
-    
+    [SerializeField] protected AudioClip[] mShootSFXs;
+    protected AudioSource mAudioSource;
+
     protected int shootNumber = 0;
     protected int hitNumber = 0;
     public int GetShootNumber()
@@ -21,6 +23,7 @@ public abstract class Shooter : MonoBehaviour
     }
     protected virtual void Start()
     {
+        mAudioSource = this.GetComponent<AudioSource>();
         Init();
     }
 
@@ -28,7 +31,8 @@ public abstract class Shooter : MonoBehaviour
 
     public virtual void Shoot()
     {
-        mVFX.Play();
+        playVFX();
+        playSFX();
         if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit rHit, maxDistance, TargetLayer))
         {
             var target = rHit.collider.GetComponent<Target>();
@@ -51,6 +55,15 @@ public abstract class Shooter : MonoBehaviour
         }
         shootNumber++;
 
+    }
+    private void playVFX()
+    {
+        mVFX.Play();
+    }
+    private void playSFX()
+    {
+        int mIndex = Random.Range(0, mShootSFXs.Length);
+        mAudioSource.PlayOneShot(mShootSFXs[mIndex]);
     }
     public float GetAccuracy()
     {
