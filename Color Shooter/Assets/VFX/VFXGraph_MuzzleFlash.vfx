@@ -81,7 +81,7 @@ MonoBehaviour:
     x: 478
     y: -1414
     width: 3689
-    height: 1958
+    height: 1959
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3506,7 +3506,7 @@ MonoBehaviour:
   particlePerStripCount: 32
   needsComputeBounds: 0
   boundsMode: 1
-  m_Space: 0
+  m_Space: 1
 --- !u!114 &8926484042661615202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6238,7 +6238,7 @@ MonoBehaviour:
   particlePerStripCount: 128
   needsComputeBounds: 0
   boundsMode: 0
-  m_Space: 0
+  m_Space: 1
 --- !u!114 &8926484042661615312
 MonoBehaviour:
   m_ObjectHideFlags: 0
