@@ -64,7 +64,7 @@ public class TargetSpawner : MonoBehaviour
         var shooters = gunManager.GetComponentsInChildren<Shooter>();
         foreach (var shooter in shooters)
         {
-            Debug.Log($"Le pistolet {shooter.currentColor} a tiré {shooter.GetShootNumber()} fois avec une précision de {shooter.GetAccuracy()} %");
+            //Debug.Log($"Le pistolet {shooter.currentColor} a tiré {shooter.GetShootNumber()} fois avec une précision de {shooter.GetAccuracy()} %");
         }
     }
     

@@ -1,27 +1,36 @@
 Fonctionnalités : 
-	FAIT => à tester in-game
-	Système de score
-		=> Précision avec chacun des pistolets
-			=> Affichage de fin (mettre le nom et sauvegarder ça dans un json ?)
+	 
+	[FAIT]Système de score
+		=> à tester in-game		
+			=> Précision avec chacun des pistolets
+				=> Affichage de fin (mettre le nom et sauvegarder ça dans un json ?)
 	
 	Voir le rayon depuis le flingue : la visée n'est pas très intuitive, il est difficile de tirer sur les cibles, ce n'est pas un probleme de distance.
 	
 	Comment afficher le score ? Faire un menu ? 
-	Enlever le fait de pouvoir sauter !!!
+	[FAIT]Enlever le fait de pouvoir sauter !!!
 	
 "Artistique" : 
 	Ajout de SFX : 
 		=> Tir depuis le flingue
 			=> Avoir plusieurs bruitages au risque de devenir redondant
+				J'en ai deux 
 		=>	Explosion des cibles 
 			=> Avoir plusieurs bruitages au risque de devenir redondant
+				A chercher
 		=> Ach qui fait la voix du Tuto sur une loop ? 
 		
 	Ajout de VFX :
+		[FAIT]
 		=> A la destruction d'une cible 
-		=> Au tir du flingue
+			=> Faut que je le fasse pop quand ça pète
+		[FAIT]=> Au tir du flingue
+				C'est faiiiiiiit et ça marche bien
+
 		=> Modele de main
-	Trouver un asset sympa pour les cibles, les cubes c'est un peu nul
+		
+	[FAIT]Trouver un asset sympa pour les cibles, les cubes c'est un peu nul
+		=> Modélisé
 	
 	
 BUG FIX : 

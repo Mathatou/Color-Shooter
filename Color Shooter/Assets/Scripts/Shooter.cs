@@ -7,7 +7,7 @@ public abstract class Shooter : MonoBehaviour
     [SerializeField] protected float maxDistance = 50.0f;
     [SerializeField] protected LayerMask TargetLayer;
     [SerializeField] protected string currentColor;
-    [SerializeField] protected VisualEffect mVFX;
+    [SerializeField] protected VisualEffect mVFX_MuzzleFLash;
     [SerializeField] protected AudioClip[] mShootSFXs;
     protected AudioSource mAudioSource;
 
@@ -38,19 +38,15 @@ public abstract class Shooter : MonoBehaviour
             var target = rHit.collider.GetComponent<Target>();
             if (target == null)
             {
-                Debug.LogWarning("C'est pas une cible �a ");
+                Debug.LogWarning("C'est pas une cible ca ");
                 return;
             }
             var myTargetColor = target.TargetColor;
-            if (target != null)
+            if (myTargetColor.Equals(currentColor))
             {
-                if (myTargetColor.Equals(currentColor))
-                {
-                    target.Die(currentColor);
-                    Debug.Log($"Cible {myTargetColor} touch� avec gun {currentColor}");
-                    hitNumber++;
-                }
-
+                target.Die(currentColor);
+                Debug.Log($"Cible {myTargetColor} touche avec gun {currentColor}");
+                hitNumber++;
             }
         }
         shootNumber++;
@@ -58,7 +54,7 @@ public abstract class Shooter : MonoBehaviour
     }
     private void playVFX()
     {
-        mVFX.Play();
+        mVFX_MuzzleFLash.SendEvent("Fire");
     }
     private void playSFX()
     {

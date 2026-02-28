@@ -6,6 +6,7 @@ public class HighScore
     public int score;
     public float accuracy;
 }
+/*
 public class mainClass : MonoBehaviour
 {
     var player = new HighScore
@@ -17,4 +18,4 @@ public class mainClass : MonoBehaviour
 
     var json = JsonUtility.ToJson(player);
     File.WriteAllText(Path.Combine(Application.persistentDataPath, "highscore.json"), json);
-}
+}*/
