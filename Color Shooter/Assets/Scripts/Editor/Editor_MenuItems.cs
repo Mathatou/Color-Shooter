@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -52,5 +53,22 @@ public class Editor_MenuItems : MonoBehaviour
         {
             DestroyImmediate(target);
         }
+    }
+
+    [MenuItem("Editor/ResetScores")]
+    public static void resetScores()
+    {
+        string path = Application.dataPath + "/HighScore/highscore.json";
+        string content = File.ReadAllText(path);
+        if(content != "")
+        {
+            File.WriteAllText(path, "");
+            Debug.Log("Scores reset successfully.");
+        }
+        else
+        {
+            Debug.Log("No scores to reset.");
+        }
+
     }
 }
