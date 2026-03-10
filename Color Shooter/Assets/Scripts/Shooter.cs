@@ -61,7 +61,7 @@ public abstract class Shooter : MonoBehaviour
         int mIndex = Random.Range(0, mShootSFXs.Length);
         mAudioSource.PlayOneShot(mShootSFXs[mIndex]);
     }
-    public float GetAccuracy()
+    public float GunAccuracy()
     {
         if (shootNumber == 0) return 0;
         return (float)hitNumber / shootNumber * 100;

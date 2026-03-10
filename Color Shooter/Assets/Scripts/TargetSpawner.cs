@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//A rename en GameManager
+
 public class TargetSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] prefabTargets;
@@ -13,6 +15,7 @@ public class TargetSpawner : MonoBehaviour
     private int numberToSpawn = 10;
     private bool hasTargetBeenSpawned = false;
     private bool hasStarted = false;
+    s_HighScore player = new s_HighScore();
 
     private List<GameObject> spawnedTargets = new List<GameObject>();
     public void SpawnTarget()
@@ -42,6 +45,14 @@ public class TargetSpawner : MonoBehaviour
     {
         // Pour �viter que le bouton soit appuy� plusieurs fois
         if (hasStarted) return;
+        if(hasTargetBeenSpawned ) 
+        {
+            Debug.Log("Les cibles ont deja spawn");
+            return;
+        }
+        player.name = "Coucou";
+        player.score = 0;
+        player.accuracy = 0;
         hasStarted = true;
         SpawnTarget();
     }
@@ -59,21 +70,33 @@ public class TargetSpawner : MonoBehaviour
         }
         spawnedTargets.Clear();
     }
-    public void getScore()
+    public int getScore()
     {
-        var shooters = gunManager.GetComponentsInChildren<Shooter>();
-        foreach (var shooter in shooters)
-        {
-            //Debug.Log($"Le pistolet {shooter.currentColor} a tiré {shooter.GetShootNumber()} fois avec une précision de {shooter.GetAccuracy()} %");
+        int score;
+        Shooter[] shooters = gunManager.GetComponentsInChildren<Shooter>();
+        foreach(var shooter in shooters){
+            score+=shooter.hitNumber;
         }
+        return score;
     }
-    
+    public float getPlayerAccuracy()
+    {
+        float accur;
+        Shooter[] shooters = gunManager.GetComponentsInChildren<Shooter>();
+        foreach(var shooter in shooters){
+            accur+=shooter.GunAccuracy();
+        }
+        return accur;
+    }
     private void Update()
     {
         spawnedTargets.RemoveAll(item => item == null);
         if (gameTime <= 0f)
         {
             Debug.Log("Time's up !");
+            player.score = getScore();
+            player.accuracy = getPlayerAccuracy();
+            Highscore.WriteOnDiskPlayer(player);
             return;
         }
         else

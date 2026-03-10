@@ -35,7 +35,7 @@ public class HighScore : MonoBehaviour
         accuracy = 98.5f
     };
     
-    void WriteOnDiskPlayer()
+    static void WriteOnDiskPlayer()
     {
         if (!Directory.Exists(JSONDIRECTORY))
         {
@@ -74,7 +74,7 @@ public class HighScore : MonoBehaviour
         jsonContent = JsonUtility.ToJson(lHighScores);
         File.WriteAllText(JSONDATAPATH, jsonContent);
     }
-    void ReadFromDisk()
+    static void ReadFromDisk()
     {
         string json = File.ReadAllText(JSONDATAPATH);
         HighScoreList playerFromDisk = JsonUtility.FromJson<HighScoreList>(json);
