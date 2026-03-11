@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +8,9 @@ public class TargetSpawner : MonoBehaviour
     [SerializeField] private GameObject[] prefabTargets;
     [SerializeField] private Transform[] spawnPosition;
     [SerializeField] private float gameTime = 60f;
-    [SerializeField] private GameObject gunManager;
-    
+    [SerializeField] private GameObject RgunManager;
+    [SerializeField] private GameObject BgunManager;
+    private List<Shooter> allShooters = new List<Shooter>();
     private int[] randomSpawnIndex;
     private int numberToSpawn = 10;
     private bool hasTargetBeenSpawned = false;
@@ -18,6 +18,14 @@ public class TargetSpawner : MonoBehaviour
     s_HighScore player = new s_HighScore();
 
     private List<GameObject> spawnedTargets = new List<GameObject>();
+
+    private void Start()
+    {
+        allShooters.AddRange(BgunManager.GetComponentsInChildren<Shooter>());
+        allShooters.AddRange(RgunManager.GetComponentsInChildren<Shooter>());
+    }
+
+
     public void SpawnTarget()
     {
         hasTargetBeenSpawned = true;
@@ -73,20 +81,30 @@ public class TargetSpawner : MonoBehaviour
     public int getScore()
     {
         int score = 0;
-        Shooter[] shooters = gunManager.GetComponentsInChildren<Shooter>();
-        foreach(var shooter in shooters){
-            score+=shooter.hitNumber;
+        for (int i =0; i < allShooters.Count; i++)
+        {
+            score += allShooters[i].GetHitNumber();
         }
         return score;
     }
     public float getPlayerAccuracy()
     {
         float accur = 0.0f;
-        Shooter[] shooters = gunManager.GetComponentsInChildren<Shooter>();
-        foreach(var shooter in shooters){
-            accur+=shooter.GunAccuracy();
+        int totalHit = 0;
+        int totalShots = 0;
+        for (int i =0; i < allShooters.Count; i++)
+        {
+            var currentShooter = allShooters[i];
+            totalHit += currentShooter.GetHitNumber();
+            totalShots += currentShooter.GetShootNumber();
         }
-        return accur;
+        // Avoid divide by zero
+        if (totalShots==0)
+        {
+            return 0;
+        }
+        accur = (float)totalHit / totalShots;
+        return accur*100;
     }
     private void Update()
     {

@@ -1,10 +1,9 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 [Serializable]
 public class HighScoreList
@@ -34,6 +33,8 @@ public class HighScore : MonoBehaviour
         score = 100,
         accuracy = 98.5f
     };
+    [SerializeField]
+    public static TextMeshProUGUI mLeaderboard;
     
     public static void WriteOnDiskPlayer(s_HighScore pPlayer)
     {
@@ -74,14 +75,27 @@ public class HighScore : MonoBehaviour
         jsonContent = JsonUtility.ToJson(lHighScores);
         File.WriteAllText(JSONDATAPATH, jsonContent);
     }
-    public static void ReadFromDisk()
+    public static HighScoreList ReadFromDisk()
     {
         string json = File.ReadAllText(JSONDATAPATH);
         HighScoreList playerFromDisk = JsonUtility.FromJson<HighScoreList>(json);
+        return playerFromDisk;
+    }
+    public static void writeLeaderBorad(HighScoreList pListHighScore)
+    {
+        string leaderboardText = "Leaderboard:\n";
+        pListHighScore.mAllScores = pListHighScore.mAllScores.OrderByDescending(score => score.score).ToList();
+        for (int i = 0; i < pListHighScore.mAllScores.Count; i++)
+        {
+            leaderboardText += $"{i + 1}. {pListHighScore.mAllScores[i].playerName} - Score: {pListHighScore.mAllScores[i].score}, Accuracy: {pListHighScore.mAllScores[i].accuracy}%\n";
+        }
+        mLeaderboard.text = leaderboardText;
     }
     private void Start()
     {
+        mLeaderboard = GameObject.Find("LeaderBoard").GetComponent<TextMeshProUGUI>();
         WriteOnDiskPlayer(player);
-        ReadFromDisk();
+        var playerList = ReadFromDisk();
+        writeLeaderBorad(playerList);
     }
 }
