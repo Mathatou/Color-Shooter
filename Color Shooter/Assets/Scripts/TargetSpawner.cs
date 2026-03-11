@@ -50,7 +50,7 @@ public class TargetSpawner : MonoBehaviour
             Debug.Log("Les cibles ont deja spawn");
             return;
         }
-        player.name = "Coucou";
+        player.playerName = "Coucou";
         player.score = 0;
         player.accuracy = 0;
         hasStarted = true;
@@ -72,7 +72,7 @@ public class TargetSpawner : MonoBehaviour
     }
     public int getScore()
     {
-        int score;
+        int score = 0;
         Shooter[] shooters = gunManager.GetComponentsInChildren<Shooter>();
         foreach(var shooter in shooters){
             score+=shooter.hitNumber;
@@ -81,7 +81,7 @@ public class TargetSpawner : MonoBehaviour
     }
     public float getPlayerAccuracy()
     {
-        float accur;
+        float accur = 0.0f;
         Shooter[] shooters = gunManager.GetComponentsInChildren<Shooter>();
         foreach(var shooter in shooters){
             accur+=shooter.GunAccuracy();
@@ -96,7 +96,7 @@ public class TargetSpawner : MonoBehaviour
             Debug.Log("Time's up !");
             player.score = getScore();
             player.accuracy = getPlayerAccuracy();
-            Highscore.WriteOnDiskPlayer(player);
+            HighScore.WriteOnDiskPlayer(player);
             return;
         }
         else

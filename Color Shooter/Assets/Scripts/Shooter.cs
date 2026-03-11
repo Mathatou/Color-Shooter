@@ -12,7 +12,7 @@ public abstract class Shooter : MonoBehaviour
     protected AudioSource mAudioSource;
 
     protected int shootNumber = 0;
-    protected int hitNumber = 0;
+    public int hitNumber = 0;
     public int GetShootNumber()
     {
         return shootNumber;

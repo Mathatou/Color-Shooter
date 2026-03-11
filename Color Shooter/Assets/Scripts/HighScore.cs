@@ -22,8 +22,8 @@ public class s_HighScore
 public class HighScore : MonoBehaviour
 {
 #if UNITY_EDITOR
-    protected string JSONDATAPATH = Application.dataPath + "/HighScore/highscore.json";
-    protected string JSONDIRECTORY = Application.dataPath + "/HighScore/";
+    protected static string JSONDATAPATH = Application.dataPath + "/HighScore/highscore.json";
+    protected static string JSONDIRECTORY = Application.dataPath + "/HighScore/";
 #elif UNITY_ANDROID
     protected string JSONDATAPATH = Application.persistentDataPath + "/HighScore/highscore.json";
     protected string JSONDIRECTORY = Application.persistentDataPath + "/HighScore/";
@@ -35,7 +35,7 @@ public class HighScore : MonoBehaviour
         accuracy = 98.5f
     };
     
-    static void WriteOnDiskPlayer()
+    public static void WriteOnDiskPlayer(s_HighScore pPlayer)
     {
         if (!Directory.Exists(JSONDIRECTORY))
         {
@@ -53,7 +53,7 @@ public class HighScore : MonoBehaviour
         {
             lHighScores = new HighScoreList();
         }
-        lHighScores.mAllScores.Add(player);
+        lHighScores.mAllScores.Add(pPlayer);
         // If there are more than 5 scores, remove the lowest one
         if (lHighScores.mAllScores.Count > 5)
         {
@@ -74,14 +74,14 @@ public class HighScore : MonoBehaviour
         jsonContent = JsonUtility.ToJson(lHighScores);
         File.WriteAllText(JSONDATAPATH, jsonContent);
     }
-    static void ReadFromDisk()
+    public static void ReadFromDisk()
     {
         string json = File.ReadAllText(JSONDATAPATH);
         HighScoreList playerFromDisk = JsonUtility.FromJson<HighScoreList>(json);
     }
     private void Start()
     {
-        WriteOnDiskPlayer();
+        WriteOnDiskPlayer(player);
         ReadFromDisk();
     }
 }
