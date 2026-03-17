@@ -7,7 +7,7 @@ public class TargetSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] prefabTargets;
     [SerializeField] private Transform[] spawnPosition;
-    [SerializeField] private float gameTime = 60f;
+    [SerializeField] private float gameTime = 60.0f;
     [SerializeField] private GameObject RgunManager;
     [SerializeField] private GameObject BgunManager;
     private List<Shooter> allShooters = new List<Shooter>();
@@ -58,7 +58,7 @@ public class TargetSpawner : MonoBehaviour
             Debug.Log("Les cibles ont deja spawn");
             return;
         }
-        player.playerName = "Coucou";
+        player.playerName = "Hadrien";
         player.score = 0;
         player.accuracy = 0;
         hasStarted = true;
@@ -112,13 +112,18 @@ public class TargetSpawner : MonoBehaviour
         if (gameTime <= 0f)
         {
             Debug.Log("Time's up !");
-            player.score = getScore();
+            player.playerName = "Hadrien";
+            //player.score = getScore();
             player.accuracy = getPlayerAccuracy();
             HighScore.WriteOnDiskPlayer(player);
+            var playerList = HighScore.ReadFromDisk();
+            HighScore.writeLeaderBorad(playerList);
             return;
         }
         else
         {
+            //Debug.Log("Time left : " + Mathf.Ceil(gameTime) + " seconds");
+            //player.score += 1;
             gameTime -= Time.deltaTime;
         }
         if (spawnedTargets.Count == 0 && hasTargetBeenSpawned)
