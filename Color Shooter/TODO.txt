@@ -1,18 +1,20 @@
 Fonctionnalités :
- 
+
 	Système de score
 	=> à tester in-game		
 		=> Précision avec chacun des pistolets
 			=> Affichage de fin (mettre le nom et sauvegarder ça dans un json ?)
 	Ecriture/Lecture avec des valeurs de tests fonctionnelle
 	
-	
+	[FAIT]
 	Comment afficher le score ? Faire un menu ? 
-	
+		=> J'ai fait un leaderboard c'est cool
+
 	Voir le rayon depuis le flingue : la visée n'est pas très intuitive, il est difficile de tirer sur les cibles, ce n'est pas un probleme de distance.
 
 
 	Revoir le système de temps 
+
 	[FAIT]
 	Enlever le fait de pouvoir sauter !!!
 	
