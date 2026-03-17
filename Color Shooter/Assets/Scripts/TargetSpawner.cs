@@ -7,7 +7,7 @@ public class TargetSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] prefabTargets;
     [SerializeField] private Transform[] spawnPosition;
-    [SerializeField] private float gameTime = 60.0f;
+    [SerializeField] private float gameTime = 0.0f;
     [SerializeField] private GameObject RgunManager;
     [SerializeField] private GameObject BgunManager;
     private List<Shooter> allShooters = new List<Shooter>();
@@ -15,6 +15,7 @@ public class TargetSpawner : MonoBehaviour
     private int numberToSpawn = 10;
     private bool hasTargetBeenSpawned = false;
     private bool hasStarted = false;
+    private bool doWeWrite = true;
     s_HighScore player = new s_HighScore();
 
     private List<GameObject> spawnedTargets = new List<GameObject>();
@@ -49,7 +50,7 @@ public class TargetSpawner : MonoBehaviour
         }
 
     }
-    public void pushButton()
+    public void StarGameByPushingButton()
     {
         // Pour �viter que le bouton soit appuy� plusieurs fois
         if (hasStarted) return;
@@ -58,15 +59,17 @@ public class TargetSpawner : MonoBehaviour
             Debug.Log("Les cibles ont deja spawn");
             return;
         }
-        player.playerName = "Hadrien";
+        player.playerName = "Hadrien"; // A remplacer par un input field pour que le joueur puisse rentrer son nom
         player.score = 0;
         player.accuracy = 0;
+        gameTime = 60.0f;
         hasStarted = true;
+        doWeWrite = true;
         SpawnTarget();
     }
     public void resetGame()
     {
-        gameTime = 60f;
+        gameTime = 0.0f;
         hasStarted = false;
         hasTargetBeenSpawned = false;
         foreach (var target in spawnedTargets)
@@ -115,9 +118,13 @@ public class TargetSpawner : MonoBehaviour
             player.playerName = "Hadrien";
             //player.score = getScore();
             player.accuracy = getPlayerAccuracy();
-            HighScore.WriteOnDiskPlayer(player);
-            var playerList = HighScore.ReadFromDisk();
-            HighScore.writeLeaderBorad(playerList);
+            if(doWeWrite)
+            {
+                HighScore.WriteOnDiskPlayer(player);
+                var playerList = HighScore.ReadFromDisk();
+                HighScore.writeLeaderBorad(playerList);
+                doWeWrite = false;
+            }
             return;
         }
         else
