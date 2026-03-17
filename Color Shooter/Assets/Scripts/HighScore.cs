@@ -30,8 +30,8 @@ public class HighScore : MonoBehaviour
     s_HighScore player = new s_HighScore
     {
         playerName = "Bob",
-        score = 100,
-        accuracy = 98.5f
+        score = 0,
+        accuracy = 0.0f
     };
     [SerializeField]
     public static TextMeshProUGUI mLeaderboard;
@@ -42,11 +42,11 @@ public class HighScore : MonoBehaviour
         {
             Debug.Log("Directory does not exists Creating...");
             Directory.CreateDirectory(JSONDIRECTORY);
-            if (!File.Exists(JSONDATAPATH))
-            {
-                Debug.Log("File does not exists Creating...");
-                File.Create(JSONDATAPATH).Dispose();
-            }
+        }
+        if (!File.Exists(JSONDATAPATH))
+        {
+            Debug.Log("File does not exists Creating...");
+            File.Create(JSONDATAPATH).Dispose();
         }
         string jsonContent = File.ReadAllText(JSONDATAPATH);
         HighScoreList lHighScores = JsonUtility.FromJson<HighScoreList>(jsonContent);
