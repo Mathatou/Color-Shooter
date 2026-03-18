@@ -1,15 +1,15 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-//A rename en GameManager
-
-public class TargetSpawner : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] prefabTargets;
     [SerializeField] private Transform[] spawnPosition;
     [SerializeField] private float gameTime = 0.0f;
     [SerializeField] private GameObject RgunManager;
     [SerializeField] private GameObject BgunManager;
+    private TextMeshProUGUI timerDisplay;
     private List<Shooter> allShooters = new List<Shooter>();
     private int[] randomSpawnIndex;
     private int numberToSpawn = 10;
@@ -24,6 +24,7 @@ public class TargetSpawner : MonoBehaviour
     {
         allShooters.AddRange(BgunManager.GetComponentsInChildren<Shooter>());
         allShooters.AddRange(RgunManager.GetComponentsInChildren<Shooter>());
+        GameObject.Find("TimerDisplay").TryGetComponent<TextMeshProUGUI>(out timerDisplay);
     }
 
 
@@ -54,7 +55,7 @@ public class TargetSpawner : MonoBehaviour
     {
         // Pour �viter que le bouton soit appuy� plusieurs fois
         if (hasStarted) return;
-        if(hasTargetBeenSpawned ) 
+        if (hasTargetBeenSpawned)
         {
             Debug.Log("Les cibles ont deja spawn");
             return;
@@ -69,7 +70,7 @@ public class TargetSpawner : MonoBehaviour
     }
     public void resetGame()
     {
-        gameTime = 0.0f;
+        gameTime = 60f;
         hasStarted = false;
         hasTargetBeenSpawned = false;
         foreach (var target in spawnedTargets)
@@ -112,13 +113,15 @@ public class TargetSpawner : MonoBehaviour
     private void Update()
     {
         spawnedTargets.RemoveAll(item => item == null);
+        timerDisplay.text = "Time : " + Mathf.Ceil(gameTime).ToString();
         if (gameTime <= 0f)
         {
+            timerDisplay.text = "Time's up !";
             Debug.Log("Time's up !");
             player.playerName = "Hadrien";
             //player.score = getScore();
             player.accuracy = getPlayerAccuracy();
-            if(doWeWrite)
+            if (doWeWrite)
             {
                 HighScore.WriteOnDiskPlayer(player);
                 var playerList = HighScore.ReadFromDisk();
@@ -130,7 +133,7 @@ public class TargetSpawner : MonoBehaviour
         else
         {
             //Debug.Log("Time left : " + Mathf.Ceil(gameTime) + " seconds");
-            //player.score += 1;
+            player.score += 1;
             gameTime -= Time.deltaTime;
         }
         if (spawnedTargets.Count == 0 && hasTargetBeenSpawned)
