@@ -3,7 +3,8 @@ Fonctionnalités :
 	Système de score
 	=> à tester in-game		
 		=> Précision avec chacun des pistolets
-			=> Affichage de fin (mettre le nom et sauvegarder ça dans un json ?)
+			=> Entrer le nom du joueur 
+			
 	Ecriture/Lecture avec des valeurs de tests fonctionnelle
 	
 	[FAIT]

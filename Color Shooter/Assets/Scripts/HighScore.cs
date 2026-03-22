@@ -24,8 +24,8 @@ public class HighScore : MonoBehaviour
     protected static string JSONDATAPATH = Application.dataPath + "/HighScore/highscore.json";
     protected static string JSONDIRECTORY = Application.dataPath + "/HighScore/";
 #elif UNITY_ANDROID
-    protected string JSONDATAPATH = Application.persistentDataPath + "/HighScore/highscore.json";
-    protected string JSONDIRECTORY = Application.persistentDataPath + "/HighScore/";
+    protected static string JSONDATAPATH = Application.persistentDataPath + "/HighScore/highscore.json";
+    protected static string JSONDIRECTORY = Application.persistentDataPath + "/HighScore/";
 #endif
     s_HighScore player = new s_HighScore
     {
@@ -94,8 +94,8 @@ public class HighScore : MonoBehaviour
     private void Start()
     {
         mLeaderboard = GameObject.Find("LeaderBoard").GetComponent<TextMeshProUGUI>();
-        WriteOnDiskPlayer(player);
-        var playerList = ReadFromDisk();
-        writeLeaderBorad(playerList);
+        //WriteOnDiskPlayer(player);
+        //var playerList = ReadFromDisk();
+        //writeLeaderBorad(playerList);
     }
 }
