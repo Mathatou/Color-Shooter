@@ -27,12 +27,6 @@ public class HighScore : MonoBehaviour
     protected static string JSONDATAPATH = Application.persistentDataPath + "/HighScore/highscore.json";
     protected static string JSONDIRECTORY = Application.persistentDataPath + "/HighScore/";
 #endif
-    s_HighScore player = new s_HighScore
-    {
-        playerName = "Bob",
-        score = 0,
-        accuracy = 0.0f
-    };
     [SerializeField]
     public static TextMeshProUGUI mLeaderboard;
     
