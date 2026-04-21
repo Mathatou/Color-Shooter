@@ -7,7 +7,7 @@ public class MyGazeInteractor : MonoBehaviour
     [SerializeField] private float maxDistance = 100f;
     [SerializeField] private float dwellTime = 10f;
     [SerializeField] private LayerMask TargetLayer;
-
+    [SerializeField] private GameObject UItoHide;
     private string[] textsToCycle = { 
     "Bienvenue dans Color Shooter !", 
     "Tirez sur les cibles de la couleur adéquate !", 
@@ -45,6 +45,10 @@ public class MyGazeInteractor : MonoBehaviour
                         }
                         currentTextIndex = (currentTextIndex + 1) % textsToCycle.Length;
                         textZone.text = textsToCycle[currentTextIndex];
+                        if (UItoHide.activeInHierarchy)
+                        {
+                            UItoHide.SetActive(false);
+                        }
                     }
                     //rHit.collider.gameObject.SetActive(false);
                     gazeTimer = 0f;
